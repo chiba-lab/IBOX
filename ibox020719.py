@@ -1499,9 +1499,8 @@ class Ui_EmpathyTrialGUI(object):
                                     Trig = IRsensorque.get()
 ## Stage 32
             # Air flows onto empty chamber only.
-            # Port #                
+            # Port 15 turns of air                
             if stagenum == '32':
-                if TrialId[x] == 2:
                     trialcount=trialcount+1
                     trialdisplay = "{0}".format(trialcount)
                     self.trialcounter.setDigitCount(len(trialdisplay))
@@ -1518,7 +1517,7 @@ class Ui_EmpathyTrialGUI(object):
                     Trig = 0
                     while(not IRsensorque.empty()):
                         CLOSE = IRsensorque.get()
-                    while Trig != 200 and Trig != 30:
+                    while Trig != 15 and Trig != 30:
                         Trig = 0
                         if sensorthread.is_alive():
                             if(not IRsensorque.empty()):
@@ -1529,14 +1528,14 @@ class Ui_EmpathyTrialGUI(object):
                                     delta2 = press - start
                                     nosepokeIDandTime[1] = delta2.total_seconds()
                                     print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                                elif Trig == 15:
-                                    nosepokeIDandTime[0]=15
+                                elif Trig == 150:
+                                    nosepokeIDandTime[0]=150
                                     press = datetime.datetime.now()
                                     delta2 = press - start
                                     nosepokeIDandTime[1] = delta2.total_seconds()
                                     print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                                elif Trig == 150:
-                                    nosepokeIDandTime[0]=150
+                                elif Trig == 200:
+                                    nosepokeIDandTime[0]=200
                                     press = datetime.datetime.now()
                                     delta2 = press - start
                                     nosepokeIDandTime[1] = delta2.total_seconds()
@@ -1546,9 +1545,9 @@ class Ui_EmpathyTrialGUI(object):
                             if(not IRsensorque.empty()):
                                 Trig = IRsensorque.get()
                         time.sleep(.01)
-                    if Trig == 200:
+                    if Trig == 15:
                         imageque.put(7)
-                        nosepokeIDandTime[0]=200
+                        nosepokeIDandTime[0]=15
                     elif Trig == 30:
                         imageque.put(4)
                         nosepokeIDandTime[0]=30
@@ -1808,7 +1807,7 @@ class Ui_EmpathyTrialGUI(object):
               
 ## Stage 34
             # air psudo-randomly alternates between self and empty. 
-            # 150 & 20 = self, 200 = empty                
+            # 150 & 20 = self, 15 = empty                
             if stagenum == '34':
                 if TrialId[x] == 1:
                     trialcount=trialcount+1
@@ -1925,7 +1924,7 @@ class Ui_EmpathyTrialGUI(object):
                     Trig = 0
                     while(not IRsensorque.empty()):
                         CLOSE = IRsensorque.get()
-                    while Trig != 200 and Trig != 30:
+                    while Trig != 15 and Trig != 30:
                         Trig = 0
                         if sensorthread.is_alive():
                             if(not IRsensorque.empty()):
@@ -1936,14 +1935,14 @@ class Ui_EmpathyTrialGUI(object):
                                     delta2 = press - start
                                     nosepokeIDandTime[1] = delta2.total_seconds()
                                     print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                                elif Trig == 15:
-                                    nosepokeIDandTime[0]=15
+                                elif Trig == 150:
+                                    nosepokeIDandTime[0]=150
                                     press = datetime.datetime.now()
                                     delta2 = press - start
                                     nosepokeIDandTime[1] = delta2.total_seconds()
                                     print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                                elif Trig == 150:
-                                    nosepokeIDandTime[0]=150
+                                elif Trig == 200:
+                                    nosepokeIDandTime[0]=200
                                     press = datetime.datetime.now()
                                     delta2 = press - start
                                     nosepokeIDandTime[1] = delta2.total_seconds()
@@ -1953,9 +1952,9 @@ class Ui_EmpathyTrialGUI(object):
                             if(not IRsensorque.empty()):
                                 Trig = IRsensorque.get()
                         time.sleep(.01)
-                    if Trig == 200:
+                    if Trig == 15:
                         imageque.put(7)
-                        nosepokeIDandTime[0]=200
+                        nosepokeIDandTime[0]=15
                     elif Trig == 30:
                         imageque.put(4)
                         nosepokeIDandTime[0]=30
@@ -2009,823 +2008,824 @@ class Ui_EmpathyTrialGUI(object):
                                 sensorthread.start()
                                 if(not IRsensorque.empty()):
                                     Trig = IRsensorque.get()
-                
-## Stage numbers: 3, 4, 5, 6, 7. Not currently being used.                            
-            if stagenum == '3':
-                if TrialId[x] == 1:
-                    trialcount=trialcount+1
-                    trialdisplay = "{0}".format(trialcount)
-                    self.trialcounter.setDigitCount(len(trialdisplay))
-                    self.trialcounter.display(trialdisplay)
-                    StepperControl.SetPosition(1,1.8,-1450)
-                    trialtimerthread = threading.Thread(None, self.Trialtime, None, ())
-                    trialtimerthread.start()
-                    imageque.put(6)
-                    move = datetime.datetime.now()
-                    delta = move - start
-                    trialstarttimeandID[0] = 1
-                    trialstarttimeandID[1] = delta.total_seconds()
-                    print >> datafile, str(trialstarttimeandID[0]), str(trialstarttimeandID[1]).rjust(savefilespacing)
-                    Trig = 0
-                    while(not IRsensorque.empty()):
-                        CLOSE = IRsensorque.get()
-                    while Trig != 20 and Trig != 30:
-                        Trig = 0
-                        if sensorthread.is_alive():
-                            if(not IRsensorque.empty()):
-                                Trig = IRsensorque.get()
-                        else:
-                            sensorthread.start()
-                            if(not IRsensorque.empty()):
-                                Trig = IRsensorque.get()
-                        time.sleep(.01)
-                        if Trig == 15:
-                            press = datetime.datetime.now()
-                            delta1 = press - start
-                            nosepokeIDandTime[0] = 3
-                            nosepokeIDandTime[1] = delta1.total_seconds()
-                            print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                    if Trig == 20:
-                        imageque.put(9)
-                        nosepokeIDandTime[0]=2
-                    elif Trig == 30:
-                        imageque.put(4)
-                        nosepokeIDandTime[0]=4
-                    press = datetime.datetime.now()
-                    if trialtimerthread.is_alive():
-                        trialtimeque.put(2)
-                    else:
-                        trialtimerthread.start()
-                        trialtimeque.put(2)
-                    delta1 = press - start
-                    nosepokeIDandTime[1] = delta1.total_seconds()
-                    print "Rat_Lever_Self was triggered at", nosepokeIDandTime[1]
-                    StepperControl.SetPosition(1,1.8,0)
-                    print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                    time.sleep(3)
-                    imageque.put(0)
-                    if x != trialnum -1:
-                        for i in range(0,(delay-3)*10):
-                            time.sleep(.1)
-                            Trig = 0
-                            if sensorthread.is_alive():
-                                if(not IRsensorque.empty()):
-                                    Trig = IRsensorque.get()
-                            else:
-                                sensorthread.start()
-                                if(not IRsensorque.empty()):
-                                    Trig = IRsensorque.get()
-                            if Trig == 15:
-                                nosepokeIDandTime[0]=3
-                            elif Trig == 20:
-                                nosepokeIDandTime[0]=2
-                            elif Trig == 30:
-                                nosepokeIDandTime[0]=4
-                if TrialId[x] == 2:
-                    trialcount=trialcount+1
-                    trialdisplay = "{0}".format(trialcount)
-                    self.trialcounter.setDigitCount(len(trialdisplay))
-                    self.trialcounter.display(trialdisplay)
-                    StepperControl.SetPosition(1,1.8,725)
-                    trialtimerthread = threading.Thread(None, self.Trialtime, None, ())
-                    trialtimerthread.start()
-                    imageque.put(5)
-                    move = datetime.datetime.now()
-                    delta = move - start
-                    trialstarttimeandID[0] = -1
-                    trialstarttimeandID[1] = delta.total_seconds()
-                    print >> datafile, str(trialstarttimeandID[0]), str(trialstarttimeandID[1]).rjust(savefilespacing)
-                    Trig = 0
-                    while(not IRsensorque.empty()):
-                        CLOSE = IRsensorque.get()
-                    while Trig != 15 and Trig != 30:
-                        Trig = 0
-                        if sensorthread.is_alive():
-                            if(not IRsensorque.empty()):
-                                Trig = IRsensorque.get()
-                        else:
-                            sensorthread.start()
-                            if(not IRsensorque.empty()):
-                                Trig = IRsensorque.get()
-                        time.sleep(.01)
-                        if Trig == 20:
-                            press = datetime.datetime.now()
-                            delta1 = press - start
-                            nosepokeIDandTime[0] = 2
-                            nosepokeIDandTime[1] = delta1.total_seconds()
-                            print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                    nosepokeIDandTime[0]=1
-                    if Trig == 15:
-                        imageque.put(7)
-                        nosepokeIDandTime[0]=3
-                    elif Trig == 30:
-                        imageque.put(4)
-                        nosepokeIDandTime[0]=4
-                    press = datetime.datetime.now()
-                    if trialtimerthread.is_alive():
-                        trialtimeque.put(2)
-                    else:
-                        trialtimerthread.start()
-                        trialtimeque.put(2)
-                    delta1 = press - start
-                    nosepokeIDandTime[1] = delta1.total_seconds()
-                    print "Rat_Lever_Self was triggered at", nosepokeIDandTime[1]
-                    StepperControl.SetPosition(1,1.8,0)
-                    print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                    time.sleep(3)
-                    imageque.put(0)
-                    if x != trialnum -1:
-                        for i in range(0,(delay-3)*10):
-                            time.sleep(.1)
-                            Trig = 0
-                            if sensorthread.is_alive():
-                                if(not IRsensorque.empty()):
-                                    Trig = IRsensorque.get()
-                            else:
-                                sensorthread.start()
-                                if(not IRsensorque.empty()):
-                                    Trig = IRsensorque.get()
-                            if Trig == 15:
-                                nosepokeIDandTime[0]=3
-                            elif Trig == 20:
-                                nosepokeIDandTime[0]=2
-                            elif Trig == 30:
-                                nosepokeIDandTime[0]=4
-                            press = datetime.datetime.now()
-                            delta1 = press - start
-                            nosepokeIDandTime[1] = delta1.total_seconds()
-
-            if stagenum == '4':
-                if TrialId[x] == 1:
-                    trialcount=trialcount+1
-                    trialdisplay = "{0}".format(trialcount)
-                    self.trialcounter.setDigitCount(len(trialdisplay))
-                    self.trialcounter.display(trialdisplay)
-                    StepperControl.SetPosition(1,1.8,-1450)
-                    trialtimerthread = threading.Thread(None, self.Trialtime, None, ())
-                    trialtimerthread.start()
-                    imageque.put(6)
-                    move = datetime.datetime.now()
-                    delta = move - start
-                    trialstarttimeandID[0] = 1
-                    trialstarttimeandID[1] = delta.total_seconds()
-                    print >> datafile, str(trialstarttimeandID[0]), str(trialstarttimeandID[1]).rjust(savefilespacing)
-                    Trig = 0
-                    while(not IRsensorque.empty()):
-                        CLOSE = IRsensorque.get()
-                    while Trig != 20 and Trig != 30:
-                        Trig = 0
-                        if sensorthread.is_alive():
-                            if(not IRsensorque.empty()):
-                                Trig = IRsensorque.get()
-                        else:
-                            sensorthread.start()
-                            if(not IRsensorque.empty()):
-                                Trig = IRsensorque.get()
-                        time.sleep(.01)
-                        if Trig == 15:
-                            press = datetime.datetime.now()
-                            delta1 = press - start
-                            nosepokeIDandTime[0] = 3
-                            nosepokeIDandTime[1] = delta1.total_seconds()
-                            print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                    if Trig == 20:
-                        imageque.put(9)
-                        nosepokeIDandTime[0]=2
-                    elif Trig == 30:
-                        imageque.put(4)
-                        nosepokeIDandTime[0]=4
-                    press = datetime.datetime.now()
-                    if trialtimerthread.is_alive():
-                        trialtimeque.put(2)
-                    else:
-                        trialtimerthread.start()
-                        trialtimeque.put(2)
-                    delta1 = press - start
-                    nosepokeIDandTime[1] = delta1.total_seconds()
-                    print "Rat_Lever_Self was triggered at", nosepokeIDandTime[1]
-                    StepperControl.SetPosition(1,1.8,0)
-                    print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                    time.sleep(3)
-                    imageque.put(0)
-                    if x != trialnum -1:
-                        for i in range(0,(delay-3)*10):
-                            time.sleep(.1)
-                            Trig = 0
-                            if sensorthread.is_alive():
-                                if(not IRsensorque.empty()):
-                                    Trig = IRsensorque.get()
-                            else:
-                                sensorthread.start()
-                                if(not IRsensorque.empty()):
-                                    Trig = IRsensorque.get()
-                            if Trig == 15:
-                                nosepokeIDandTime[0]=3
-                            elif Trig == 20:
-                                nosepokeIDandTime[0]=2
-                            elif Trig == 30:
-                                nosepokeIDandTime[0]=4
-                            press = datetime.datetime.now()
-                            delta1 = press - start
-                            nosepokeIDandTime[1] = delta1.total_seconds()
-                if TrialId[x] == 2:
-                    trialcount=trialcount+1
-                    trialdisplay = "{0}".format(trialcount)
-                    self.trialcounter.setDigitCount(len(trialdisplay))
-                    self.trialcounter.display(trialdisplay)
-                    StepperControl.SetPosition(1,1.8,725)
-                    trialtimerthread = threading.Thread(None, self.Trialtime, None, ())
-                    trialtimerthread.start()
-                    imageque.put(5)
-                    move = datetime.datetime.now()
-                    delta = move - start
-                    trialstarttimeandID[0] = -1
-                    trialstarttimeandID[1] = delta.total_seconds()
-                    print >> datafile, str(trialstarttimeandID[0]), str(trialstarttimeandID[1]).rjust(savefilespacing)
-                    Trig = 0
-                    while(not IRsensorque.empty()):
-                        CLOSE = IRsensorque.get()
-                    while Trig != 15 and Trig != 30:
-                        Trig = 0
-                        if sensorthread.is_alive():
-                            if(not IRsensorque.empty()):
-                                Trig = IRsensorque.get()
-                        else:
-                            sensorthread.start()
-                            if(not IRsensorque.empty()):
-                                Trig = IRsensorque.get()
-                        time.sleep(.01)
-                        if Trig == 20:
-                            press = datetime.datetime.now()
-                            delta1 = press - start
-                            nosepokeIDandTime[0] = 2
-                            nosepokeIDandTime[1] = delta1.total_seconds()
-                            print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                    nosepokeIDandTime[0]=1
-                    if Trig == 15:
-                        imageque.put(7)
-                        nosepokeIDandTime[0]=3
-                    elif Trig == 30:
-                        imageque.put(4)
-                        nosepokeIDandTime[0]=4
-                    press = datetime.datetime.now()
-                    if trialtimerthread.is_alive():
-                        trialtimeque.put(2)
-                    else:
-                        trialtimerthread.start()
-                        trialtimeque.put(2)
-                    delta1 = press - start
-                    nosepokeIDandTime[1] = delta1.total_seconds()
-                    print "Rat_Lever_Self was triggered at", nosepokeIDandTime[1]
-                    StepperControl.SetPosition(1,1.8,0)
-                    print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                    time.sleep(3)
-                    imageque.put(0)
-                    if x != trialnum -1:
-                        for i in range(0,(delay-3)*10):
-                            time.sleep(.1)
-                            Trig = 0
-                            if sensorthread.is_alive():
-                                if(not IRsensorque.empty()):
-                                    Trig = IRsensorque.get()
-                            else:
-                                sensorthread.start()
-                                if(not IRsensorque.empty()):
-                                    Trig = IRsensorque.get()
-                            if Trig == 15:
-                                nosepokeIDandTime[0]=3
-                            elif Trig == 20:
-                                nosepokeIDandTime[0]=2
-                            elif Trig == 30:
-                                nosepokeIDandTime[0]=4
-                            press = datetime.datetime.now()
-                            delta1 = press - start
-                            nosepokeIDandTime[1] = delta1.total_seconds()
-
-            if stagenum == '5':
-                if TrialId[x] == 1:
-                    trialcount=trialcount+1
-                    trialdisplay = "{0}".format(trialcount)
-                    self.trialcounter.setDigitCount(len(trialdisplay))
-                    self.trialcounter.display(trialdisplay)
-                    StepperControl.SetPosition(1,1.8,-1450)
-                    trialtimerthread = threading.Thread(None, self.Trialtime, None, ())
-                    trialtimerthread.start()
-                    imageque.put(6)
-                    move = datetime.datetime.now()
-                    delta = move - start
-                    trialstarttimeandID[0] = 1
-                    trialstarttimeandID[1] = delta.total_seconds()
-                    print >> datafile, str(trialstarttimeandID[0]), str(trialstarttimeandID[1]).rjust(savefilespacing)
-                    Trig = 0
-                    while(not IRsensorque.empty()):
-                        CLOSE = IRsensorque.get()
-                    while Trig != 20 and Trig != 30:
-                        Trig = 0
-                        if sensorthread.is_alive():
-                            if(not IRsensorque.empty()):
-                                Trig = IRsensorque.get()
-                        else:
-                            sensorthread.start()
-                            if(not IRsensorque.empty()):
-                                Trig = IRsensorque.get()
-                        time.sleep(.01)
-                        if Trig == 15:
-                            press = datetime.datetime.now()
-                            delta1 = press - start
-                            nosepokeIDandTime[0] = 3
-                            nosepokeIDandTime[1] = delta1.total_seconds()
-                            print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                    if Trig == 20:
-                        imageque.put(9)
-                        nosepokeIDandTime[0]=2
-                    elif Trig == 30:
-                        imageque.put(4)
-                        nosepokeIDandTime[0]=4
-                    press = datetime.datetime.now()
-                    if trialtimerthread.is_alive():
-                        trialtimeque.put(2)
-                    else:
-                        trialtimerthread.start()
-                        trialtimeque.put(2)
-                    delta1 = press - start
-                    nosepokeIDandTime[1] = delta1.total_seconds()
-                    print "Rat_Lever_Self was triggered at", nosepokeIDandTime[1]
-                    StepperControl.SetPosition(1,1.8,0)
-                    print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                    time.sleep(3)
-                    imageque.put(0)
-                    if x != trialnum -1:
-                        for i in range(0,(delay-3)*10):
-                            time.sleep(.1)
-                            Trig = 0
-                            if sensorthread.is_alive():
-                                if(not IRsensorque.empty()):
-                                    Trig = IRsensorque.get()
-                            else:
-                                sensorthread.start()
-                                if(not IRsensorque.empty()):
-                                    Trig = IRsensorque.get()
-                            if Trig == 15:
-                                nosepokeIDandTime[0]=3
-                            elif Trig == 20:
-                                nosepokeIDandTime[0]=2
-                            elif Trig == 30:
-                                nosepokeIDandTime[0]=4
-                            press = datetime.datetime.now()
-                            delta1 = press - start
-                            nosepokeIDandTime[1] = delta1.total_seconds()
-                if TrialId[x] == 2:
-                    trialcount=trialcount+1
-                    trialdisplay = "{0}".format(trialcount)
-                    self.trialcounter.setDigitCount(len(trialdisplay))
-                    self.trialcounter.display(trialdisplay)
-                    StepperControl.SetPosition(1,1.8,-725)
-                    trialtimerthread = threading.Thread(None, self.Trialtime, None, ())
-                    trialtimerthread.start()
-                    imageque.put(10)
-                    move = datetime.datetime.now()
-                    delta = move - start
-                    trialstarttimeandID[0] = -1
-                    trialstarttimeandID[1] = delta.total_seconds()
-                    print >> datafile, str(trialstarttimeandID[0]), str(trialstarttimeandID[1]).rjust(savefilespacing)
-                    Trig = 0
-                    while(not IRsensorque.empty()):
-                        CLOSE = IRsensorque.get()
-                    while Trig != 15 and Trig != 30:
-                        Trig = 0
-                        if sensorthread.is_alive():
-                            if(not IRsensorque.empty()):
-                                Trig = IRsensorque.get()
-                        else:
-                            sensorthread.start()
-                            if(not IRsensorque.empty()):
-                                Trig = IRsensorque.get()
-                        time.sleep(.01)
-                        if Trig == 20:
-                            press = datetime.datetime.now()
-                            delta1 = press - start
-                            nosepokeIDandTime[0] = 2
-                            nosepokeIDandTime[1] = delta1.total_seconds()
-                            print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                    nosepokeIDandTime[0]=1
-                    if Trig == 15:
-                        imageque.put(11)
-                        nosepokeIDandTime[0]=3
-                    elif Trig == 30:
-                        imageque.put(12)
-                        nosepokeIDandTime[0]=4
-                    press = datetime.datetime.now()
-                    if trialtimerthread.is_alive():
-                        trialtimeque.put(2)
-                    else:
-                        trialtimerthread.start()
-                        trialtimeque.put(2)
-                    delta1 = press - start
-                    nosepokeIDandTime[1] = delta1.total_seconds()
-                    print "Rat_Lever_Self was triggered at", nosepokeIDandTime[1]
-                    StepperControl.SetPosition(1,1.8,0)
-                    print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                    time.sleep(3)
-                    imageque.put(0)
-                    if x != trialnum -1:
-                        for i in range(0,(delay-3)*10):
-                            time.sleep(.1)
-                            Trig = 0
-                            if sensorthread.is_alive():
-                                if(not IRsensorque.empty()):
-                                    Trig = IRsensorque.get()
-                            else:
-                                sensorthread.start()
-                                if(not IRsensorque.empty()):
-                                    Trig = IRsensorque.get()
-                            if Trig == 15:
-                                nosepokeIDandTime[0]=3
-                            elif Trig == 20:
-                                nosepokeIDandTime[0]=2
-                            elif Trig == 30:
-                                nosepokeIDandTime[0]=4
-                            press = datetime.datetime.now()
-                            delta1 = press - start
-                            nosepokeIDandTime[1] = delta1.total_seconds()
-
-
-        #stage 6 between empty and friend. Random, but can't have more than 3 same trials in a row
-            if stagenum == '6':
-                if TrialId[x] == 1:
-                    trialcount=trialcount+1
-                    trialdisplay = "{0}".format(trialcount)
-                    self.trialcounter.setDigitCount(len(trialdisplay))
-                    self.trialcounter.display(trialdisplay)
-                    StepperControl.SetPosition(1,1.8, 725)
-                    trialtimerthread = threading.Thread(None, self.Trialtime, None, ())
-                    trialtimerthread.start()
-                    imageque.put(6)
-                    move = datetime.datetime.now()
-                    delta = move - start
-                    trialstarttimeandID[0] = 1
-                    trialstarttimeandID[1] = delta.total_seconds()
-                    print >> datafile, str(trialstarttimeandID[0]), str(trialstarttimeandID[1]).rjust(savefilespacing)
-                    Trig = 0
-                    while(not IRsensorque.empty()):
-                        CLOSE = IRsensorque.get()
-                    while Trig != 20 and Trig != 30:
-                        Trig = 0
-                        if sensorthread.is_alive():
-                            if(not IRsensorque.empty()):
-                                Trig = IRsensorque.get()
-                        else:
-                            sensorthread.start()
-                            if(not IRsensorque.empty()):
-                                Trig = IRsensorque.get()
-                        time.sleep(.01)
-                        if Trig == 15:
-                            press = datetime.datetime.now()
-                            delta1 = press - start
-                            nosepokeIDandTime[0] = 3
-                            nosepokeIDandTime[1] = delta1.total_seconds()
-                            print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                    if Trig == 20:
-                        imageque.put(9)
-                        nosepokeIDandTime[0]=2
-                    elif Trig == 30:
-                        imageque.put(4)
-                        nosepokeIDandTime[0]=4
-                    press = datetime.datetime.now()
-                    if trialtimerthread.is_alive():
-                        trialtimeque.put(2)
-                    else:
-                        trialtimerthread.start()
-                        trialtimeque.put(2)
-                    delta1 = press - start
-                    nosepokeIDandTime[1] = delta1.total_seconds()
-                    print "Rat_Lever_Self was triggered at", nosepokeIDandTime[1]
-                    StepperControl.SetPosition(1,1.8,0)
-
                     
-                    print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                    time.sleep(3)
-                    imageque.put(0)
-                    if x != trialnum -1:
-                        for i in range(0,(delay-3)*10):
-                            time.sleep(.1)
-                            Trig = 0
-                            if sensorthread.is_alive():
-                                if(not IRsensorque.empty()):
-                                    Trig = IRsensorque.get()
-                            else:
-                                sensorthread.start()
-                                if(not IRsensorque.empty()):
-                                    Trig = IRsensorque.get()
-                            if Trig == 15:
-                                nosepokeIDandTime[0]=3
-                            elif Trig == 20:
-                                nosepokeIDandTime[0]=2
-                            elif Trig == 30:
-                                nosepokeIDandTime[0]=4
-                            press = datetime.datetime.now()
-                            delta1 = press - start
-                            nosepokeIDandTime[1] = delta1.total_seconds()
-                if TrialId[x] == 2:
-                    trialcount=trialcount+1
-                    trialdisplay = "{0}".format(trialcount)
-                    self.trialcounter.setDigitCount(len(trialdisplay))
-                    self.trialcounter.display(trialdisplay)
-                    StepperControl.SetPosition(1,1.8,-725)
-                    trialtimerthread = threading.Thread(None, self.Trialtime, None, ())
-                    trialtimerthread.start()
-                    imageque.put(10)
-                    move = datetime.datetime.now()
-                    delta = move - start
-                    trialstarttimeandID[0] = -1
-                    trialstarttimeandID[1] = delta.total_seconds()
-                    print >> datafile, str(trialstarttimeandID[0]), str(trialstarttimeandID[1]).rjust(savefilespacing)
-                    Trig = 0
-                    while(not IRsensorque.empty()):
-                        CLOSE = IRsensorque.get()
-                    while Trig != 15 and Trig != 30:
-                        Trig = 0
-                        if sensorthread.is_alive():
-                            if(not IRsensorque.empty()):
-                                Trig = IRsensorque.get()
-                        else:
-                            sensorthread.start()
-                            if(not IRsensorque.empty()):
-                                Trig = IRsensorque.get()
-                        time.sleep(.01)
-                        if Trig == 20:
-                            press = datetime.datetime.now()
-                            delta1 = press - start
-                            nosepokeIDandTime[0] = 2
-                            nosepokeIDandTime[1] = delta1.total_seconds()
-                            print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                    nosepokeIDandTime[0]=1
-                    if Trig == 15:
-                        imageque.put(11)
-                        nosepokeIDandTime[0]=3
-                    elif Trig == 30:
-                        imageque.put(12)
-                        nosepokeIDandTime[0]=4
-                    press = datetime.datetime.now()
-                    if trialtimerthread.is_alive():
-                        trialtimeque.put(2)
-                    else:
-                        trialtimerthread.start()
-                        trialtimeque.put(2)
-                    delta1 = press - start
-                    nosepokeIDandTime[1] = delta1.total_seconds()
-
-                    print "Rat_Lever_Self was triggered at", nosepokeIDandTime[1]
-
-                    StepperControl.SetPosition(1,1.8,0)
                 
-                    print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                    time.sleep(3)
-                    imageque.put(0)
-                    if x != trialnum -1:
-                        for i in range(0,(delay-3)*10):
-                            time.sleep(.1)
-                            Trig = 0
-                            if sensorthread.is_alive():
-                                if(not IRsensorque.empty()):
-                                    Trig = IRsensorque.get()
-                            else:
-                                sensorthread.start()
-                                if(not IRsensorque.empty()):
-                                    Trig = IRsensorque.get()
-                            if Trig == 15:
-                                nosepokeIDandTime[0]=3
-                            elif Trig == 20:
-                                nosepokeIDandTime[0]=2
-                            elif Trig == 30:
-                                nosepokeIDandTime[0]=4
-                            press = datetime.datetime.now()
-                            delta1 = press - start
-                            nosepokeIDandTime[1] = delta1.total_seconds()
-
-
-          #stage 7 all three chambers
-            if stagenum == '7':
-                 if TrialId[x] == 1:
-                    trialcount=trialcount+1
-                    trialdisplay = "{0}".format(trialcount)
-                    self.trialcounter.setDigitCount(len(trialdisplay))
-                    self.trialcounter.display(trialdisplay)
-                    StepperControl.SetPosition(1,1.8,-1450)
-                    trialtimerthread = threading.Thread(None, self.Trialtime, None, ())
-                    trialtimerthread.start()
-                    imageque.put(6)
-                    move = datetime.datetime.now()
-                    delta = move - start
-                    trialstarttimeandID[0] = 1
-                    trialstarttimeandID[1] = delta.total_seconds()
-                    print >> datafile, str(trialstarttimeandID[0]), str(trialstarttimeandID[1]).rjust(savefilespacing)
-                    Trig = 0
-                    while(not IRsensorque.empty()):
-                        CLOSE = IRsensorque.get()
-                    while Trig != 20 and Trig != 30:
-                        Trig = 0
-                        if sensorthread.is_alive():
-                            if(not IRsensorque.empty()):
-                                Trig = IRsensorque.get()
-                        else:
-                            sensorthread.start()
-                            if(not IRsensorque.empty()):
-                                Trig = IRsensorque.get()
-                        time.sleep(.01)
-                        if Trig == 15:
-                            press = datetime.datetime.now()
-                            delta1 = press - start
-                            nosepokeIDandTime[0] = 3
-                            nosepokeIDandTime[1] = delta1.total_seconds()
-                            print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                    if Trig == 20:
-                        imageque.put(9)
-                        nosepokeIDandTime[0]=2
-                    elif Trig == 30:
-                        imageque.put(4)
-                        nosepokeIDandTime[0]=4
-                    press = datetime.datetime.now()
-                    if trialtimerthread.is_alive():
-                        trialtimeque.put(2)
-                    else:
-                        trialtimerthread.start()
-                        trialtimeque.put(2)
-                    delta1 = press - start
-                    nosepokeIDandTime[1] = delta1.total_seconds()
-                    print "Rat_Lever_Self was triggered at", nosepokeIDandTime[1]
-                    StepperControl.SetPosition(1,1.8,0)
-                    print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                    time.sleep(3)
-                    imageque.put(0)
-                    if x != trialnum -1:
-                        for i in range(0,(delay-3)*10):
-                            time.sleep(.1)
-                            Trig = 0
-                            if sensorthread.is_alive():
-                                if(not IRsensorque.empty()):
-                                    Trig = IRsensorque.get()
-                            else:
-                                sensorthread.start()
-                                if(not IRsensorque.empty()):
-                                    Trig = IRsensorque.get()
-                            if Trig == 15:
-                                nosepokeIDandTime[0]=3
-                            elif Trig == 20:
-                                nosepokeIDandTime[0]=2
-                            elif Trig == 30:
-                                nosepokeIDandTime[0]=4
-                            press = datetime.datetime.now()
-                            delta1 = press - start
-                            nosepokeIDandTime[1] = delta1.total_seconds()
-                 if TrialId[x] == 2:
-                    trialcount=trialcount+1
-                    trialdisplay = "{0}".format(trialcount)
-                    self.trialcounter.setDigitCount(len(trialdisplay))
-                    self.trialcounter.display(trialdisplay)
-                    StepperControl.SetPosition(1,1.8,725)
-                    trialtimerthread = threading.Thread(None, self.Trialtime, None, ())
-                    trialtimerthread.start()
-                    imageque.put(10)
-                    move = datetime.datetime.now()
-                    delta = move - start
-                    trialstarttimeandID[0] = -1
-                    trialstarttimeandID[1] = delta.total_seconds()
-                    print >> datafile, str(trialstarttimeandID[0]), str(trialstarttimeandID[1]).rjust(savefilespacing)
-                    Trig = 0
-                    while(not IRsensorque.empty()):
-                        CLOSE = IRsensorque.get()
-                    while Trig != 15 and Trig != 30:
-                        Trig = 0
-                        if sensorthread.is_alive():
-                            if(not IRsensorque.empty()):
-                                Trig = IRsensorque.get()
-                        else:
-                            sensorthread.start()
-                            if(not IRsensorque.empty()):
-                                Trig = IRsensorque.get()
-                        time.sleep(.01)
-                        if Trig == 20:
-                            press = datetime.datetime.now()
-                            delta1 = press - start
-                            nosepokeIDandTime[0] = 2
-                            nosepokeIDandTime[1] = delta1.total_seconds()
-                            print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                    nosepokeIDandTime[0]=1
-                    if Trig == 15:
-                        imageque.put(11)
-                        nosepokeIDandTime[0]=3
-                    elif Trig == 30:
-                        imageque.put(12)
-                        nosepokeIDandTime[0]=4
-                    press = datetime.datetime.now()
-                    if trialtimerthread.is_alive():
-                        trialtimeque.put(2)
-                    else:
-                        trialtimerthread.start()
-                        trialtimeque.put(2)
-                    delta1 = press - start
-                    nosepokeIDandTime[1] = delta1.total_seconds()
-                    print "Rat_Lever_Self was triggered at", nosepokeIDandTime[1]
-                    StepperControl.SetPosition(1,1.8,0)
-                    print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                    time.sleep(3)
-                    imageque.put(0)
-                    if x != trialnum -1:
-                        for i in range(0,(delay-3)*10):
-                            time.sleep(.1)
-                            Trig = 0
-                            if sensorthread.is_alive():
-                                if(not IRsensorque.empty()):
-                                    Trig = IRsensorque.get()
-                            else:
-                                sensorthread.start()
-                                if(not IRsensorque.empty()):
-                                    Trig = IRsensorque.get()
-                            if Trig == 15:
-                                nosepokeIDandTime[0]=3
-                            elif Trig == 20:
-                                nosepokeIDandTime[0]=2
-                            elif Trig == 30:
-                                nosepokeIDandTime[0]=4
-                            press = datetime.datetime.now()
-                            delta1 = press - start
-                            nosepokeIDandTime[1] = delta1.total_seconds()
-                            
-                 if TrialId[x] == 3:
-                    trialcount=trialcount+1
-                    trialdisplay = "{0}".format(trialcount)
-                    self.trialcounter.setDigitCount(len(trialdisplay))
-                    self.trialcounter.display(trialdisplay)
-                    StepperControl.SetPosition(1,1.8,-725)
-                    trialtimerthread = threading.Thread(None, self.Trialtime, None, ())
-                    trialtimerthread.start()
-                    imageque.put(10)
-                    move = datetime.datetime.now()
-                    delta = move - start
-                    trialstarttimeandID[0] = -1
-                    trialstarttimeandID[1] = delta.total_seconds()
-                    print >> datafile, str(trialstarttimeandID[0]), str(trialstarttimeandID[1]).rjust(savefilespacing)
-                    Trig = 0
-                    while(not IRsensorque.empty()):
-                        CLOSE = IRsensorque.get()
-                    while Trig != 15 and Trig != 30:
-                        Trig = 0
-                        if sensorthread.is_alive():
-                            if(not IRsensorque.empty()):
-                                Trig = IRsensorque.get()
-                        else:
-                            sensorthread.start()
-                            if(not IRsensorque.empty()):
-                                Trig = IRsensorque.get()
-                        time.sleep(.01)
-                        if Trig == 20:
-                            press = datetime.datetime.now()
-                            delta1 = press - start
-                            nosepokeIDandTime[0] = 2
-                            nosepokeIDandTime[1] = delta1.total_seconds()
-                            print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                    nosepokeIDandTime[0]=1
-                    if Trig == 15:
-                        imageque.put(11)
-                        nosepokeIDandTime[0]=3
-                    elif Trig == 30:
-                        imageque.put(12)
-                        nosepokeIDandTime[0]=4
-                    press = datetime.datetime.now()
-                    if trialtimerthread.is_alive():
-                        trialtimeque.put(2)
-                    else:
-                        trialtimerthread.start()
-                        trialtimeque.put(2)
-                    delta1 = press - start
-                    nosepokeIDandTime[1] = delta1.total_seconds()
-                    print "Rat_Lever_Self was triggered at", nosepokeIDandTime[1]
-                    StepperControl.SetPosition(1,1.8,0)
-                    print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                    time.sleep(3)
-                    imageque.put(0)
-                    if x != trialnum -1:
-                        for i in range(0,(delay-3)*10):
-                            time.sleep(.1)
-                            Trig = 0
-                            if sensorthread.is_alive():
-                                if(not IRsensorque.empty()):
-                                    Trig = IRsensorque.get()
-                            else:
-                                sensorthread.start()
-                                if(not IRsensorque.empty()):
-                                    Trig = IRsensorque.get()
-                            if Trig == 15:
-                                nosepokeIDandTime[0]=3
-                            elif Trig == 20:
-                                nosepokeIDandTime[0]=2
-                            elif Trig == 30:
-                                nosepokeIDandTime[0]=4
-                            press = datetime.datetime.now()
-                            delta1 = press - start
-                            nosepokeIDandTime[1] = delta1.total_seconds()      
-
+#### Stage numbers: 3, 4, 5, 6, 7. Not currently being used.                            
+##            if stagenum == '3':
+##                if TrialId[x] == 1:
+##                    trialcount=trialcount+1
+##                    trialdisplay = "{0}".format(trialcount)
+##                    self.trialcounter.setDigitCount(len(trialdisplay))
+##                    self.trialcounter.display(trialdisplay)
+##                    StepperControl.SetPosition(1,1.8,-1450)
+##                    trialtimerthread = threading.Thread(None, self.Trialtime, None, ())
+##                    trialtimerthread.start()
+##                    imageque.put(6)
+##                    move = datetime.datetime.now()
+##                    delta = move - start
+##                    trialstarttimeandID[0] = 1
+##                    trialstarttimeandID[1] = delta.total_seconds()
+##                    print >> datafile, str(trialstarttimeandID[0]), str(trialstarttimeandID[1]).rjust(savefilespacing)
+##                    Trig = 0
+##                    while(not IRsensorque.empty()):
+##                        CLOSE = IRsensorque.get()
+##                    while Trig != 20 and Trig != 30:
+##                        Trig = 0
+##                        if sensorthread.is_alive():
+##                            if(not IRsensorque.empty()):
+##                                Trig = IRsensorque.get()
+##                        else:
+##                            sensorthread.start()
+##                            if(not IRsensorque.empty()):
+##                                Trig = IRsensorque.get()
+##                        time.sleep(.01)
+##                        if Trig == 15:
+##                            press = datetime.datetime.now()
+##                            delta1 = press - start
+##                            nosepokeIDandTime[0] = 3
+##                            nosepokeIDandTime[1] = delta1.total_seconds()
+##                            print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
+##                    if Trig == 20:
+##                        imageque.put(9)
+##                        nosepokeIDandTime[0]=2
+##                    elif Trig == 30:
+##                        imageque.put(4)
+##                        nosepokeIDandTime[0]=4
+##                    press = datetime.datetime.now()
+##                    if trialtimerthread.is_alive():
+##                        trialtimeque.put(2)
+##                    else:
+##                        trialtimerthread.start()
+##                        trialtimeque.put(2)
+##                    delta1 = press - start
+##                    nosepokeIDandTime[1] = delta1.total_seconds()
+##                    print "Rat_Lever_Self was triggered at", nosepokeIDandTime[1]
+##                    StepperControl.SetPosition(1,1.8,0)
+##                    print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
+##                    time.sleep(3)
+##                    imageque.put(0)
+##                    if x != trialnum -1:
+##                        for i in range(0,(delay-3)*10):
+##                            time.sleep(.1)
+##                            Trig = 0
+##                            if sensorthread.is_alive():
+##                                if(not IRsensorque.empty()):
+##                                    Trig = IRsensorque.get()
+##                            else:
+##                                sensorthread.start()
+##                                if(not IRsensorque.empty()):
+##                                    Trig = IRsensorque.get()
+##                            if Trig == 15:
+##                                nosepokeIDandTime[0]=3
+##                            elif Trig == 20:
+##                                nosepokeIDandTime[0]=2
+##                            elif Trig == 30:
+##                                nosepokeIDandTime[0]=4
+##                if TrialId[x] == 2:
+##                    trialcount=trialcount+1
+##                    trialdisplay = "{0}".format(trialcount)
+##                    self.trialcounter.setDigitCount(len(trialdisplay))
+##                    self.trialcounter.display(trialdisplay)
+##                    StepperControl.SetPosition(1,1.8,725)
+##                    trialtimerthread = threading.Thread(None, self.Trialtime, None, ())
+##                    trialtimerthread.start()
+##                    imageque.put(5)
+##                    move = datetime.datetime.now()
+##                    delta = move - start
+##                    trialstarttimeandID[0] = -1
+##                    trialstarttimeandID[1] = delta.total_seconds()
+##                    print >> datafile, str(trialstarttimeandID[0]), str(trialstarttimeandID[1]).rjust(savefilespacing)
+##                    Trig = 0
+##                    while(not IRsensorque.empty()):
+##                        CLOSE = IRsensorque.get()
+##                    while Trig != 15 and Trig != 30:
+##                        Trig = 0
+##                        if sensorthread.is_alive():
+##                            if(not IRsensorque.empty()):
+##                                Trig = IRsensorque.get()
+##                        else:
+##                            sensorthread.start()
+##                            if(not IRsensorque.empty()):
+##                                Trig = IRsensorque.get()
+##                        time.sleep(.01)
+##                        if Trig == 20:
+##                            press = datetime.datetime.now()
+##                            delta1 = press - start
+##                            nosepokeIDandTime[0] = 2
+##                            nosepokeIDandTime[1] = delta1.total_seconds()
+##                            print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
+##                    nosepokeIDandTime[0]=1
+##                    if Trig == 15:
+##                        imageque.put(7)
+##                        nosepokeIDandTime[0]=3
+##                    elif Trig == 30:
+##                        imageque.put(4)
+##                        nosepokeIDandTime[0]=4
+##                    press = datetime.datetime.now()
+##                    if trialtimerthread.is_alive():
+##                        trialtimeque.put(2)
+##                    else:
+##                        trialtimerthread.start()
+##                        trialtimeque.put(2)
+##                    delta1 = press - start
+##                    nosepokeIDandTime[1] = delta1.total_seconds()
+##                    print "Rat_Lever_Self was triggered at", nosepokeIDandTime[1]
+##                    StepperControl.SetPosition(1,1.8,0)
+##                    print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
+##                    time.sleep(3)
+##                    imageque.put(0)
+##                    if x != trialnum -1:
+##                        for i in range(0,(delay-3)*10):
+##                            time.sleep(.1)
+##                            Trig = 0
+##                            if sensorthread.is_alive():
+##                                if(not IRsensorque.empty()):
+##                                    Trig = IRsensorque.get()
+##                            else:
+##                                sensorthread.start()
+##                                if(not IRsensorque.empty()):
+##                                    Trig = IRsensorque.get()
+##                            if Trig == 15:
+##                                nosepokeIDandTime[0]=3
+##                            elif Trig == 20:
+##                                nosepokeIDandTime[0]=2
+##                            elif Trig == 30:
+##                                nosepokeIDandTime[0]=4
+##                            press = datetime.datetime.now()
+##                            delta1 = press - start
+##                            nosepokeIDandTime[1] = delta1.total_seconds()
+##
+##            if stagenum == '4':
+##                if TrialId[x] == 1:
+##                    trialcount=trialcount+1
+##                    trialdisplay = "{0}".format(trialcount)
+##                    self.trialcounter.setDigitCount(len(trialdisplay))
+##                    self.trialcounter.display(trialdisplay)
+##                    StepperControl.SetPosition(1,1.8,-1450)
+##                    trialtimerthread = threading.Thread(None, self.Trialtime, None, ())
+##                    trialtimerthread.start()
+##                    imageque.put(6)
+##                    move = datetime.datetime.now()
+##                    delta = move - start
+##                    trialstarttimeandID[0] = 1
+##                    trialstarttimeandID[1] = delta.total_seconds()
+##                    print >> datafile, str(trialstarttimeandID[0]), str(trialstarttimeandID[1]).rjust(savefilespacing)
+##                    Trig = 0
+##                    while(not IRsensorque.empty()):
+##                        CLOSE = IRsensorque.get()
+##                    while Trig != 20 and Trig != 30:
+##                        Trig = 0
+##                        if sensorthread.is_alive():
+##                            if(not IRsensorque.empty()):
+##                                Trig = IRsensorque.get()
+##                        else:
+##                            sensorthread.start()
+##                            if(not IRsensorque.empty()):
+##                                Trig = IRsensorque.get()
+##                        time.sleep(.01)
+##                        if Trig == 15:
+##                            press = datetime.datetime.now()
+##                            delta1 = press - start
+##                            nosepokeIDandTime[0] = 3
+##                            nosepokeIDandTime[1] = delta1.total_seconds()
+##                            print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
+##                    if Trig == 20:
+##                        imageque.put(9)
+##                        nosepokeIDandTime[0]=2
+##                    elif Trig == 30:
+##                        imageque.put(4)
+##                        nosepokeIDandTime[0]=4
+##                    press = datetime.datetime.now()
+##                    if trialtimerthread.is_alive():
+##                        trialtimeque.put(2)
+##                    else:
+##                        trialtimerthread.start()
+##                        trialtimeque.put(2)
+##                    delta1 = press - start
+##                    nosepokeIDandTime[1] = delta1.total_seconds()
+##                    print "Rat_Lever_Self was triggered at", nosepokeIDandTime[1]
+##                    StepperControl.SetPosition(1,1.8,0)
+##                    print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
+##                    time.sleep(3)
+##                    imageque.put(0)
+##                    if x != trialnum -1:
+##                        for i in range(0,(delay-3)*10):
+##                            time.sleep(.1)
+##                            Trig = 0
+##                            if sensorthread.is_alive():
+##                                if(not IRsensorque.empty()):
+##                                    Trig = IRsensorque.get()
+##                            else:
+##                                sensorthread.start()
+##                                if(not IRsensorque.empty()):
+##                                    Trig = IRsensorque.get()
+##                            if Trig == 15:
+##                                nosepokeIDandTime[0]=3
+##                            elif Trig == 20:
+##                                nosepokeIDandTime[0]=2
+##                            elif Trig == 30:
+##                                nosepokeIDandTime[0]=4
+##                            press = datetime.datetime.now()
+##                            delta1 = press - start
+##                            nosepokeIDandTime[1] = delta1.total_seconds()
+##                if TrialId[x] == 2:
+##                    trialcount=trialcount+1
+##                    trialdisplay = "{0}".format(trialcount)
+##                    self.trialcounter.setDigitCount(len(trialdisplay))
+##                    self.trialcounter.display(trialdisplay)
+##                    StepperControl.SetPosition(1,1.8,725)
+##                    trialtimerthread = threading.Thread(None, self.Trialtime, None, ())
+##                    trialtimerthread.start()
+##                    imageque.put(5)
+##                    move = datetime.datetime.now()
+##                    delta = move - start
+##                    trialstarttimeandID[0] = -1
+##                    trialstarttimeandID[1] = delta.total_seconds()
+##                    print >> datafile, str(trialstarttimeandID[0]), str(trialstarttimeandID[1]).rjust(savefilespacing)
+##                    Trig = 0
+##                    while(not IRsensorque.empty()):
+##                        CLOSE = IRsensorque.get()
+##                    while Trig != 15 and Trig != 30:
+##                        Trig = 0
+##                        if sensorthread.is_alive():
+##                            if(not IRsensorque.empty()):
+##                                Trig = IRsensorque.get()
+##                        else:
+##                            sensorthread.start()
+##                            if(not IRsensorque.empty()):
+##                                Trig = IRsensorque.get()
+##                        time.sleep(.01)
+##                        if Trig == 20:
+##                            press = datetime.datetime.now()
+##                            delta1 = press - start
+##                            nosepokeIDandTime[0] = 2
+##                            nosepokeIDandTime[1] = delta1.total_seconds()
+##                            print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
+##                    nosepokeIDandTime[0]=1
+##                    if Trig == 15:
+##                        imageque.put(7)
+##                        nosepokeIDandTime[0]=3
+##                    elif Trig == 30:
+##                        imageque.put(4)
+##                        nosepokeIDandTime[0]=4
+##                    press = datetime.datetime.now()
+##                    if trialtimerthread.is_alive():
+##                        trialtimeque.put(2)
+##                    else:
+##                        trialtimerthread.start()
+##                        trialtimeque.put(2)
+##                    delta1 = press - start
+##                    nosepokeIDandTime[1] = delta1.total_seconds()
+##                    print "Rat_Lever_Self was triggered at", nosepokeIDandTime[1]
+##                    StepperControl.SetPosition(1,1.8,0)
+##                    print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
+##                    time.sleep(3)
+##                    imageque.put(0)
+##                    if x != trialnum -1:
+##                        for i in range(0,(delay-3)*10):
+##                            time.sleep(.1)
+##                            Trig = 0
+##                            if sensorthread.is_alive():
+##                                if(not IRsensorque.empty()):
+##                                    Trig = IRsensorque.get()
+##                            else:
+##                                sensorthread.start()
+##                                if(not IRsensorque.empty()):
+##                                    Trig = IRsensorque.get()
+##                            if Trig == 15:
+##                                nosepokeIDandTime[0]=3
+##                            elif Trig == 20:
+##                                nosepokeIDandTime[0]=2
+##                            elif Trig == 30:
+##                                nosepokeIDandTime[0]=4
+##                            press = datetime.datetime.now()
+##                            delta1 = press - start
+##                            nosepokeIDandTime[1] = delta1.total_seconds()
+##
+##            if stagenum == '5':
+##                if TrialId[x] == 1:
+##                    trialcount=trialcount+1
+##                    trialdisplay = "{0}".format(trialcount)
+##                    self.trialcounter.setDigitCount(len(trialdisplay))
+##                    self.trialcounter.display(trialdisplay)
+##                    StepperControl.SetPosition(1,1.8,-1450)
+##                    trialtimerthread = threading.Thread(None, self.Trialtime, None, ())
+##                    trialtimerthread.start()
+##                    imageque.put(6)
+##                    move = datetime.datetime.now()
+##                    delta = move - start
+##                    trialstarttimeandID[0] = 1
+##                    trialstarttimeandID[1] = delta.total_seconds()
+##                    print >> datafile, str(trialstarttimeandID[0]), str(trialstarttimeandID[1]).rjust(savefilespacing)
+##                    Trig = 0
+##                    while(not IRsensorque.empty()):
+##                        CLOSE = IRsensorque.get()
+##                    while Trig != 20 and Trig != 30:
+##                        Trig = 0
+##                        if sensorthread.is_alive():
+##                            if(not IRsensorque.empty()):
+##                                Trig = IRsensorque.get()
+##                        else:
+##                            sensorthread.start()
+##                            if(not IRsensorque.empty()):
+##                                Trig = IRsensorque.get()
+##                        time.sleep(.01)
+##                        if Trig == 15:
+##                            press = datetime.datetime.now()
+##                            delta1 = press - start
+##                            nosepokeIDandTime[0] = 3
+##                            nosepokeIDandTime[1] = delta1.total_seconds()
+##                            print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
+##                    if Trig == 20:
+##                        imageque.put(9)
+##                        nosepokeIDandTime[0]=2
+##                    elif Trig == 30:
+##                        imageque.put(4)
+##                        nosepokeIDandTime[0]=4
+##                    press = datetime.datetime.now()
+##                    if trialtimerthread.is_alive():
+##                        trialtimeque.put(2)
+##                    else:
+##                        trialtimerthread.start()
+##                        trialtimeque.put(2)
+##                    delta1 = press - start
+##                    nosepokeIDandTime[1] = delta1.total_seconds()
+##                    print "Rat_Lever_Self was triggered at", nosepokeIDandTime[1]
+##                    StepperControl.SetPosition(1,1.8,0)
+##                    print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
+##                    time.sleep(3)
+##                    imageque.put(0)
+##                    if x != trialnum -1:
+##                        for i in range(0,(delay-3)*10):
+##                            time.sleep(.1)
+##                            Trig = 0
+##                            if sensorthread.is_alive():
+##                                if(not IRsensorque.empty()):
+##                                    Trig = IRsensorque.get()
+##                            else:
+##                                sensorthread.start()
+##                                if(not IRsensorque.empty()):
+##                                    Trig = IRsensorque.get()
+##                            if Trig == 15:
+##                                nosepokeIDandTime[0]=3
+##                            elif Trig == 20:
+##                                nosepokeIDandTime[0]=2
+##                            elif Trig == 30:
+##                                nosepokeIDandTime[0]=4
+##                            press = datetime.datetime.now()
+##                            delta1 = press - start
+##                            nosepokeIDandTime[1] = delta1.total_seconds()
+##                if TrialId[x] == 2:
+##                    trialcount=trialcount+1
+##                    trialdisplay = "{0}".format(trialcount)
+##                    self.trialcounter.setDigitCount(len(trialdisplay))
+##                    self.trialcounter.display(trialdisplay)
+##                    StepperControl.SetPosition(1,1.8,-725)
+##                    trialtimerthread = threading.Thread(None, self.Trialtime, None, ())
+##                    trialtimerthread.start()
+##                    imageque.put(10)
+##                    move = datetime.datetime.now()
+##                    delta = move - start
+##                    trialstarttimeandID[0] = -1
+##                    trialstarttimeandID[1] = delta.total_seconds()
+##                    print >> datafile, str(trialstarttimeandID[0]), str(trialstarttimeandID[1]).rjust(savefilespacing)
+##                    Trig = 0
+##                    while(not IRsensorque.empty()):
+##                        CLOSE = IRsensorque.get()
+##                    while Trig != 15 and Trig != 30:
+##                        Trig = 0
+##                        if sensorthread.is_alive():
+##                            if(not IRsensorque.empty()):
+##                                Trig = IRsensorque.get()
+##                        else:
+##                            sensorthread.start()
+##                            if(not IRsensorque.empty()):
+##                                Trig = IRsensorque.get()
+##                        time.sleep(.01)
+##                        if Trig == 20:
+##                            press = datetime.datetime.now()
+##                            delta1 = press - start
+##                            nosepokeIDandTime[0] = 2
+##                            nosepokeIDandTime[1] = delta1.total_seconds()
+##                            print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
+##                    nosepokeIDandTime[0]=1
+##                    if Trig == 15:
+##                        imageque.put(11)
+##                        nosepokeIDandTime[0]=3
+##                    elif Trig == 30:
+##                        imageque.put(12)
+##                        nosepokeIDandTime[0]=4
+##                    press = datetime.datetime.now()
+##                    if trialtimerthread.is_alive():
+##                        trialtimeque.put(2)
+##                    else:
+##                        trialtimerthread.start()
+##                        trialtimeque.put(2)
+##                    delta1 = press - start
+##                    nosepokeIDandTime[1] = delta1.total_seconds()
+##                    print "Rat_Lever_Self was triggered at", nosepokeIDandTime[1]
+##                    StepperControl.SetPosition(1,1.8,0)
+##                    print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
+##                    time.sleep(3)
+##                    imageque.put(0)
+##                    if x != trialnum -1:
+##                        for i in range(0,(delay-3)*10):
+##                            time.sleep(.1)
+##                            Trig = 0
+##                            if sensorthread.is_alive():
+##                                if(not IRsensorque.empty()):
+##                                    Trig = IRsensorque.get()
+##                            else:
+##                                sensorthread.start()
+##                                if(not IRsensorque.empty()):
+##                                    Trig = IRsensorque.get()
+##                            if Trig == 15:
+##                                nosepokeIDandTime[0]=3
+##                            elif Trig == 20:
+##                                nosepokeIDandTime[0]=2
+##                            elif Trig == 30:
+##                                nosepokeIDandTime[0]=4
+##                            press = datetime.datetime.now()
+##                            delta1 = press - start
+##                            nosepokeIDandTime[1] = delta1.total_seconds()
+##
+##
+##        #stage 6 between empty and friend. Random, but can't have more than 3 same trials in a row
+##            if stagenum == '6':
+##                if TrialId[x] == 1:
+##                    trialcount=trialcount+1
+##                    trialdisplay = "{0}".format(trialcount)
+##                    self.trialcounter.setDigitCount(len(trialdisplay))
+##                    self.trialcounter.display(trialdisplay)
+##                    StepperControl.SetPosition(1,1.8, 725)
+##                    trialtimerthread = threading.Thread(None, self.Trialtime, None, ())
+##                    trialtimerthread.start()
+##                    imageque.put(6)
+##                    move = datetime.datetime.now()
+##                    delta = move - start
+##                    trialstarttimeandID[0] = 1
+##                    trialstarttimeandID[1] = delta.total_seconds()
+##                    print >> datafile, str(trialstarttimeandID[0]), str(trialstarttimeandID[1]).rjust(savefilespacing)
+##                    Trig = 0
+##                    while(not IRsensorque.empty()):
+##                        CLOSE = IRsensorque.get()
+##                    while Trig != 20 and Trig != 30:
+##                        Trig = 0
+##                        if sensorthread.is_alive():
+##                            if(not IRsensorque.empty()):
+##                                Trig = IRsensorque.get()
+##                        else:
+##                            sensorthread.start()
+##                            if(not IRsensorque.empty()):
+##                                Trig = IRsensorque.get()
+##                        time.sleep(.01)
+##                        if Trig == 15:
+##                            press = datetime.datetime.now()
+##                            delta1 = press - start
+##                            nosepokeIDandTime[0] = 3
+##                            nosepokeIDandTime[1] = delta1.total_seconds()
+##                            print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
+##                    if Trig == 20:
+##                        imageque.put(9)
+##                        nosepokeIDandTime[0]=2
+##                    elif Trig == 30:
+##                        imageque.put(4)
+##                        nosepokeIDandTime[0]=4
+##                    press = datetime.datetime.now()
+##                    if trialtimerthread.is_alive():
+##                        trialtimeque.put(2)
+##                    else:
+##                        trialtimerthread.start()
+##                        trialtimeque.put(2)
+##                    delta1 = press - start
+##                    nosepokeIDandTime[1] = delta1.total_seconds()
+##                    print "Rat_Lever_Self was triggered at", nosepokeIDandTime[1]
+##                    StepperControl.SetPosition(1,1.8,0)
+##
+##                    
+##                    print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
+##                    time.sleep(3)
+##                    imageque.put(0)
+##                    if x != trialnum -1:
+##                        for i in range(0,(delay-3)*10):
+##                            time.sleep(.1)
+##                            Trig = 0
+##                            if sensorthread.is_alive():
+##                                if(not IRsensorque.empty()):
+##                                    Trig = IRsensorque.get()
+##                            else:
+##                                sensorthread.start()
+##                                if(not IRsensorque.empty()):
+##                                    Trig = IRsensorque.get()
+##                            if Trig == 15:
+##                                nosepokeIDandTime[0]=3
+##                            elif Trig == 20:
+##                                nosepokeIDandTime[0]=2
+##                            elif Trig == 30:
+##                                nosepokeIDandTime[0]=4
+##                            press = datetime.datetime.now()
+##                            delta1 = press - start
+##                            nosepokeIDandTime[1] = delta1.total_seconds()
+##                if TrialId[x] == 2:
+##                    trialcount=trialcount+1
+##                    trialdisplay = "{0}".format(trialcount)
+##                    self.trialcounter.setDigitCount(len(trialdisplay))
+##                    self.trialcounter.display(trialdisplay)
+##                    StepperControl.SetPosition(1,1.8,-725)
+##                    trialtimerthread = threading.Thread(None, self.Trialtime, None, ())
+##                    trialtimerthread.start()
+##                    imageque.put(10)
+##                    move = datetime.datetime.now()
+##                    delta = move - start
+##                    trialstarttimeandID[0] = -1
+##                    trialstarttimeandID[1] = delta.total_seconds()
+##                    print >> datafile, str(trialstarttimeandID[0]), str(trialstarttimeandID[1]).rjust(savefilespacing)
+##                    Trig = 0
+##                    while(not IRsensorque.empty()):
+##                        CLOSE = IRsensorque.get()
+##                    while Trig != 15 and Trig != 30:
+##                        Trig = 0
+##                        if sensorthread.is_alive():
+##                            if(not IRsensorque.empty()):
+##                                Trig = IRsensorque.get()
+##                        else:
+##                            sensorthread.start()
+##                            if(not IRsensorque.empty()):
+##                                Trig = IRsensorque.get()
+##                        time.sleep(.01)
+##                        if Trig == 20:
+##                            press = datetime.datetime.now()
+##                            delta1 = press - start
+##                            nosepokeIDandTime[0] = 2
+##                            nosepokeIDandTime[1] = delta1.total_seconds()
+##                            print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
+##                    nosepokeIDandTime[0]=1
+##                    if Trig == 15:
+##                        imageque.put(11)
+##                        nosepokeIDandTime[0]=3
+##                    elif Trig == 30:
+##                        imageque.put(12)
+##                        nosepokeIDandTime[0]=4
+##                    press = datetime.datetime.now()
+##                    if trialtimerthread.is_alive():
+##                        trialtimeque.put(2)
+##                    else:
+##                        trialtimerthread.start()
+##                        trialtimeque.put(2)
+##                    delta1 = press - start
+##                    nosepokeIDandTime[1] = delta1.total_seconds()
+##
+##                    print "Rat_Lever_Self was triggered at", nosepokeIDandTime[1]
+##
+##                    StepperControl.SetPosition(1,1.8,0)
+##                
+##                    print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
+##                    time.sleep(3)
+##                    imageque.put(0)
+##                    if x != trialnum -1:
+##                        for i in range(0,(delay-3)*10):
+##                            time.sleep(.1)
+##                            Trig = 0
+##                            if sensorthread.is_alive():
+##                                if(not IRsensorque.empty()):
+##                                    Trig = IRsensorque.get()
+##                            else:
+##                                sensorthread.start()
+##                                if(not IRsensorque.empty()):
+##                                    Trig = IRsensorque.get()
+##                            if Trig == 15:
+##                                nosepokeIDandTime[0]=3
+##                            elif Trig == 20:
+##                                nosepokeIDandTime[0]=2
+##                            elif Trig == 30:
+##                                nosepokeIDandTime[0]=4
+##                            press = datetime.datetime.now()
+##                            delta1 = press - start
+##                            nosepokeIDandTime[1] = delta1.total_seconds()
+##
+##
+##          #stage 7 all three chambers
+##            if stagenum == '7':
+##                 if TrialId[x] == 1:
+##                    trialcount=trialcount+1
+##                    trialdisplay = "{0}".format(trialcount)
+##                    self.trialcounter.setDigitCount(len(trialdisplay))
+##                    self.trialcounter.display(trialdisplay)
+##                    StepperControl.SetPosition(1,1.8,-1450)
+##                    trialtimerthread = threading.Thread(None, self.Trialtime, None, ())
+##                    trialtimerthread.start()
+##                    imageque.put(6)
+##                    move = datetime.datetime.now()
+##                    delta = move - start
+##                    trialstarttimeandID[0] = 1
+##                    trialstarttimeandID[1] = delta.total_seconds()
+##                    print >> datafile, str(trialstarttimeandID[0]), str(trialstarttimeandID[1]).rjust(savefilespacing)
+##                    Trig = 0
+##                    while(not IRsensorque.empty()):
+##                        CLOSE = IRsensorque.get()
+##                    while Trig != 20 and Trig != 30:
+##                        Trig = 0
+##                        if sensorthread.is_alive():
+##                            if(not IRsensorque.empty()):
+##                                Trig = IRsensorque.get()
+##                        else:
+##                            sensorthread.start()
+##                            if(not IRsensorque.empty()):
+##                                Trig = IRsensorque.get()
+##                        time.sleep(.01)
+##                        if Trig == 15:
+##                            press = datetime.datetime.now()
+##                            delta1 = press - start
+##                            nosepokeIDandTime[0] = 3
+##                            nosepokeIDandTime[1] = delta1.total_seconds()
+##                            print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
+##                    if Trig == 20:
+##                        imageque.put(9)
+##                        nosepokeIDandTime[0]=2
+##                    elif Trig == 30:
+##                        imageque.put(4)
+##                        nosepokeIDandTime[0]=4
+##                    press = datetime.datetime.now()
+##                    if trialtimerthread.is_alive():
+##                        trialtimeque.put(2)
+##                    else:
+##                        trialtimerthread.start()
+##                        trialtimeque.put(2)
+##                    delta1 = press - start
+##                    nosepokeIDandTime[1] = delta1.total_seconds()
+##                    print "Rat_Lever_Self was triggered at", nosepokeIDandTime[1]
+##                    StepperControl.SetPosition(1,1.8,0)
+##                    print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
+##                    time.sleep(3)
+##                    imageque.put(0)
+##                    if x != trialnum -1:
+##                        for i in range(0,(delay-3)*10):
+##                            time.sleep(.1)
+##                            Trig = 0
+##                            if sensorthread.is_alive():
+##                                if(not IRsensorque.empty()):
+##                                    Trig = IRsensorque.get()
+##                            else:
+##                                sensorthread.start()
+##                                if(not IRsensorque.empty()):
+##                                    Trig = IRsensorque.get()
+##                            if Trig == 15:
+##                                nosepokeIDandTime[0]=3
+##                            elif Trig == 20:
+##                                nosepokeIDandTime[0]=2
+##                            elif Trig == 30:
+##                                nosepokeIDandTime[0]=4
+##                            press = datetime.datetime.now()
+##                            delta1 = press - start
+##                            nosepokeIDandTime[1] = delta1.total_seconds()
+##                 if TrialId[x] == 2:
+##                    trialcount=trialcount+1
+##                    trialdisplay = "{0}".format(trialcount)
+##                    self.trialcounter.setDigitCount(len(trialdisplay))
+##                    self.trialcounter.display(trialdisplay)
+##                    StepperControl.SetPosition(1,1.8,725)
+##                    trialtimerthread = threading.Thread(None, self.Trialtime, None, ())
+##                    trialtimerthread.start()
+##                    imageque.put(10)
+##                    move = datetime.datetime.now()
+##                    delta = move - start
+##                    trialstarttimeandID[0] = -1
+##                    trialstarttimeandID[1] = delta.total_seconds()
+##                    print >> datafile, str(trialstarttimeandID[0]), str(trialstarttimeandID[1]).rjust(savefilespacing)
+##                    Trig = 0
+##                    while(not IRsensorque.empty()):
+##                        CLOSE = IRsensorque.get()
+##                    while Trig != 15 and Trig != 30:
+##                        Trig = 0
+##                        if sensorthread.is_alive():
+##                            if(not IRsensorque.empty()):
+##                                Trig = IRsensorque.get()
+##                        else:
+##                            sensorthread.start()
+##                            if(not IRsensorque.empty()):
+##                                Trig = IRsensorque.get()
+##                        time.sleep(.01)
+##                        if Trig == 20:
+##                            press = datetime.datetime.now()
+##                            delta1 = press - start
+##                            nosepokeIDandTime[0] = 2
+##                            nosepokeIDandTime[1] = delta1.total_seconds()
+##                            print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
+##                    nosepokeIDandTime[0]=1
+##                    if Trig == 15:
+##                        imageque.put(11)
+##                        nosepokeIDandTime[0]=3
+##                    elif Trig == 30:
+##                        imageque.put(12)
+##                        nosepokeIDandTime[0]=4
+##                    press = datetime.datetime.now()
+##                    if trialtimerthread.is_alive():
+##                        trialtimeque.put(2)
+##                    else:
+##                        trialtimerthread.start()
+##                        trialtimeque.put(2)
+##                    delta1 = press - start
+##                    nosepokeIDandTime[1] = delta1.total_seconds()
+##                    print "Rat_Lever_Self was triggered at", nosepokeIDandTime[1]
+##                    StepperControl.SetPosition(1,1.8,0)
+##                    print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
+##                    time.sleep(3)
+##                    imageque.put(0)
+##                    if x != trialnum -1:
+##                        for i in range(0,(delay-3)*10):
+##                            time.sleep(.1)
+##                            Trig = 0
+##                            if sensorthread.is_alive():
+##                                if(not IRsensorque.empty()):
+##                                    Trig = IRsensorque.get()
+##                            else:
+##                                sensorthread.start()
+##                                if(not IRsensorque.empty()):
+##                                    Trig = IRsensorque.get()
+##                            if Trig == 15:
+##                                nosepokeIDandTime[0]=3
+##                            elif Trig == 20:
+##                                nosepokeIDandTime[0]=2
+##                            elif Trig == 30:
+##                                nosepokeIDandTime[0]=4
+##                            press = datetime.datetime.now()
+##                            delta1 = press - start
+##                            nosepokeIDandTime[1] = delta1.total_seconds()
+##                            
+##                 if TrialId[x] == 3:
+##                    trialcount=trialcount+1
+##                    trialdisplay = "{0}".format(trialcount)
+##                    self.trialcounter.setDigitCount(len(trialdisplay))
+##                    self.trialcounter.display(trialdisplay)
+##                    StepperControl.SetPosition(1,1.8,-725)
+##                    trialtimerthread = threading.Thread(None, self.Trialtime, None, ())
+##                    trialtimerthread.start()
+##                    imageque.put(10)
+##                    move = datetime.datetime.now()
+##                    delta = move - start
+##                    trialstarttimeandID[0] = -1
+##                    trialstarttimeandID[1] = delta.total_seconds()
+##                    print >> datafile, str(trialstarttimeandID[0]), str(trialstarttimeandID[1]).rjust(savefilespacing)
+##                    Trig = 0
+##                    while(not IRsensorque.empty()):
+##                        CLOSE = IRsensorque.get()
+##                    while Trig != 15 and Trig != 30:
+##                        Trig = 0
+##                        if sensorthread.is_alive():
+##                            if(not IRsensorque.empty()):
+##                                Trig = IRsensorque.get()
+##                        else:
+##                            sensorthread.start()
+##                            if(not IRsensorque.empty()):
+##                                Trig = IRsensorque.get()
+##                        time.sleep(.01)
+##                        if Trig == 20:
+##                            press = datetime.datetime.now()
+##                            delta1 = press - start
+##                            nosepokeIDandTime[0] = 2
+##                            nosepokeIDandTime[1] = delta1.total_seconds()
+##                            print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
+##                    nosepokeIDandTime[0]=1
+##                    if Trig == 15:
+##                        imageque.put(11)
+##                        nosepokeIDandTime[0]=3
+##                    elif Trig == 30:
+##                        imageque.put(12)
+##                        nosepokeIDandTime[0]=4
+##                    press = datetime.datetime.now()
+##                    if trialtimerthread.is_alive():
+##                        trialtimeque.put(2)
+##                    else:
+##                        trialtimerthread.start()
+##                        trialtimeque.put(2)
+##                    delta1 = press - start
+##                    nosepokeIDandTime[1] = delta1.total_seconds()
+##                    print "Rat_Lever_Self was triggered at", nosepokeIDandTime[1]
+##                    StepperControl.SetPosition(1,1.8,0)
+##                    print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
+##                    time.sleep(3)
+##                    imageque.put(0)
+##                    if x != trialnum -1:
+##                        for i in range(0,(delay-3)*10):
+##                            time.sleep(.1)
+##                            Trig = 0
+##                            if sensorthread.is_alive():
+##                                if(not IRsensorque.empty()):
+##                                    Trig = IRsensorque.get()
+##                            else:
+##                                sensorthread.start()
+##                                if(not IRsensorque.empty()):
+##                                    Trig = IRsensorque.get()
+##                            if Trig == 15:
+##                                nosepokeIDandTime[0]=3
+##                            elif Trig == 20:
+##                                nosepokeIDandTime[0]=2
+##                            elif Trig == 30:
+##                                nosepokeIDandTime[0]=4
+##                            press = datetime.datetime.now()
+##                            delta1 = press - start
+##                            nosepokeIDandTime[1] = delta1.total_seconds()      
+##
 ### End of stages code     
                       
           
