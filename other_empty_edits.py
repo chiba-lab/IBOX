@@ -987,26 +987,27 @@ class Ui_EmpathyTrialGUI(object):
                                     Trig = IRsensorque.get()
 ## Stage 23
             # Air alternates between friend/other (trial id = 3) and empty (trial id = 2).
-            # Ports 15 and 200 turn off for self and port 20 turns of for friend/other.
+            # Ports 150 turn off for empty and port 20 turns of for friend/other.
             if stagenum == '23':
-                if TrialId[x] == 1:
+                # TrialId = [2,3,2,3,2,3]
+                if TrialId[x] == 2:
                     trialcount=trialcount+1
                     trialdisplay = "{0}".format(trialcount)
                     self.trialcounter.setDigitCount(len(trialdisplay))
                     self.trialcounter.display(trialdisplay)
-                    StepperControl.SetPosition(1,1.8,1400)
+                    StepperControl.SetPosition(1,1.8,725)
                     trialtimerthread = threading.Thread(None, self.Trialtime, None, ())
                     trialtimerthread.start()
-                    imageque.put(1)
+                    imageque.put(11) #used to be 5 (Ervey)
                     move = datetime.datetime.now()
                     delta = move - start
-                    trialstarttimeandID[0] = 1
+                    trialstarttimeandID[0] = 2
                     trialstarttimeandID[1] = delta.total_seconds()
                     print >> datafile, str(trialstarttimeandID[0]), str(trialstarttimeandID[1]).rjust(savefilespacing)
                     Trig = 0
                     while(not IRsensorque.empty()):
                         CLOSE = IRsensorque.get()
-                    while Trig != 15 and Trig != 200 and Trig != 30:
+                    while Trig != 150 and Trig != 30:
                         Trig = 0
                         if sensorthread.is_alive():
                             if(not IRsensorque.empty()):
@@ -1017,8 +1018,14 @@ class Ui_EmpathyTrialGUI(object):
                                     delta2 = press - start
                                     nosepokeIDandTime[1] = delta2.total_seconds()
                                     print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
-                                elif Trig == 150:
-                                    nosepokeIDandTime[0]=150
+                                elif Trig == 200:
+                                    nosepokeIDandTime[0]=200
+                                    press = datetime.datetime.now()
+                                    delta2 = press - start
+                                    nosepokeIDandTime[1] = delta2.total_seconds()
+                                    print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
+                                elif Trig == 15:
+                                    nosepokeIDandTime[0]=15
                                     press = datetime.datetime.now()
                                     delta2 = press - start
                                     nosepokeIDandTime[1] = delta2.total_seconds()
@@ -1028,15 +1035,12 @@ class Ui_EmpathyTrialGUI(object):
                             if(not IRsensorque.empty()):
                                 Trig = IRsensorque.get()
                         time.sleep(.01)
-                    if Trig == 15:
-                        imageque.put(3)
-                        nosepokeIDandTime[0]=15
-                    elif Trig == 200:
-                        imageque.put(4)
-                        nosepokeIDandTime[0]=200
+                    if Trig == 150:
+                        imageque.put(15) #used to be 7 (Ervey)
+                        nosepokeIDandTime[0]=150
                     elif Trig == 30:
-                        #imageque.put(4)
-                        nosepokeIDandTime[0]=4
+                        imageque.put(11) #used to be 4 (Ervey)
+                        nosepokeIDandTime[0]=30
                     press = datetime.datetime.now()
                     if trialtimerthread.is_alive():
                         trialtimeque.put(2)
@@ -1196,31 +1200,37 @@ class Ui_EmpathyTrialGUI(object):
             # Air psuedo-randomly alternates between cagemate and other.
             # Ports 200 turn off for other. Port 15 turns off for empty.
             if stagenum == '24':
-                #TrialId = [1,3,3,3,1,3,3,1]
-                if TrialId[x] == 1:
+                #TrialId = [2,3,2,3,2,3]
+                if TrialId[x] == 2:
                     trialcount=trialcount+1
                     trialdisplay = "{0}".format(trialcount)
                     self.trialcounter.setDigitCount(len(trialdisplay))
                     self.trialcounter.display(trialdisplay)
-                    StepperControl.SetPosition(1,1.8,1400)
+                    StepperControl.SetPosition(1,1.8,725)
                     trialtimerthread = threading.Thread(None, self.Trialtime, None, ())
                     trialtimerthread.start()
-                    imageque.put(1)
+                    imageque.put(11) #used to be 5 (Ervey)
                     move = datetime.datetime.now()
                     delta = move - start
-                    trialstarttimeandID[0] = 1
+                    trialstarttimeandID[0] = 2
                     trialstarttimeandID[1] = delta.total_seconds()
                     print >> datafile, str(trialstarttimeandID[0]), str(trialstarttimeandID[1]).rjust(savefilespacing)
                     Trig = 0
                     while(not IRsensorque.empty()):
                         CLOSE = IRsensorque.get()
-                    while Trig != 150 and Trig != 20 and Trig != 30:
+                    while Trig != 15 and Trig != 30:
                         Trig = 0
                         if sensorthread.is_alive():
                             if(not IRsensorque.empty()):
                                 Trig = IRsensorque.get()
-                                if Trig == 15:
-                                    nosepokeIDandTime[0]=15
+                                if Trig == 20:
+                                    nosepokeIDandTime[0]=20
+                                    press = datetime.datetime.now()
+                                    delta2 = press - start
+                                    nosepokeIDandTime[1] = delta2.total_seconds()
+                                    print >> datafile, str(nosepokeIDandTime[0]), str(nosepokeIDandTime[1]).rjust(savefilespacing)
+                                elif Trig == 150:
+                                    nosepokeIDandTime[0]=150
                                     press = datetime.datetime.now()
                                     delta2 = press - start
                                     nosepokeIDandTime[1] = delta2.total_seconds()
@@ -1236,14 +1246,11 @@ class Ui_EmpathyTrialGUI(object):
                             if(not IRsensorque.empty()):
                                 Trig = IRsensorque.get()
                         time.sleep(.01)
-                    if Trig == 150:
-                        imageque.put(5)
-                        nosepokeIDandTime[0]=150
-                    elif Trig == 20:
-                        imageque.put(2)
-                        nosepokeIDandTime[0]=20
+                    if Trig == 15:
+                        imageque.put(13) #used to be 7 (Ervey)
+                        nosepokeIDandTime[0]=15
                     elif Trig == 30:
-                        imageque.put(4)
+                        imageque.put(11) #used to be 4 (Ervey)
                         nosepokeIDandTime[0]=30
                     press = datetime.datetime.now()
                     if trialtimerthread.is_alive():
