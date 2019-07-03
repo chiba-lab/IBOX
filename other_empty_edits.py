@@ -524,7 +524,7 @@ class Ui_EmpathyTrialGUI(object):
         if stagenum == '23' or stagenum == '24':
             TrialId = []
             for i in range(0,int(trialnum)/2):
-                TrialId_temp = [1,3] 
+                TrialId_temp = [2,3] 
                 random.shuffle(TrialId_temp)
                 TrialId.extend(TrialId_temp)
             print TrialId
