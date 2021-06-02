@@ -7,7 +7,7 @@ event_table.date = [];
 event_table.day=[];
 event_table.trial_type=[];
 event_table.behavior = [];
-event_table.air_on = [];
+event_table.agent = [];
 event_table.start_time = [];
 event_table.stop_time = [];
 event_table.duration = [];
@@ -30,28 +30,21 @@ for i = 1:length(filelist)
     event_table.date = vertcat(event_table.date, repmat(date,L,1));
     event_table.day= vertcat(event_table.day, repmat(day,L,1));
     event_table.trial_type = vertcat(event_table.trial_type, repmat(trialtype,L,1));
-    
-    
-    
-    
 
     if fstring == "EW3_31_021519_D21_Anno.csv"
         event_table.behavior = vertcat(event_table.behavior, raw_table.Var1);
-        event_table.air_on = vertcat(event_table.air_on, raw_table.Var2);
+        event_table.agent = vertcat(event_table.agent, raw_table.Var2);
         event_table.start_time = vertcat(event_table.start_time, raw_table.Var3);
         event_table.stop_time = vertcat(event_table.stop_time, raw_table.Var5);
         event_table.duration = vertcat(event_table.duration, raw_table.Var7);
     else
         event_table.behavior = vertcat(event_table.behavior, raw_table.Var1);
-        event_table.air_on = vertcat(event_table.air_on, raw_table.Var2);
+        event_table.agent = vertcat(event_table.agent, raw_table.Var2);
         event_table.start_time = vertcat(event_table.start_time, raw_table.Var3);
         event_table.stop_time = vertcat(event_table.stop_time, raw_table.Var4);
         event_table.duration = vertcat(event_table.duration, raw_table.Var5);
     end
-    
 
-    
-      
 end
     
     
